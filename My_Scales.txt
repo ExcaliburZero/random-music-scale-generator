@@ -1,0 +1,1 @@
+{"Scales": "C G D A E B F# F Bb Eb Ab Db Gb"}
