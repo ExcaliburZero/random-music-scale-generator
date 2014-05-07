@@ -47,7 +47,10 @@ def grab_scale():
     print(output)
 
     #Output template code
-    output_scale = Label(theGUI, text=output).grid(row = 3, column = 0)
+    output_scale = Text(theGUI, height = 1, width = 2)
+    output_scale.grid(row = 3, column = 0)
+    output_scale.insert(END, output)
+    #output_scale = Label(theGUI, text=output).grid(row = 3, column = 0)
     
     return
 
