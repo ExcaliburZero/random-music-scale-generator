@@ -16,7 +16,7 @@ import ast
 #Grab random scale
 def grab_scale():
 
-    #Grab scale list
+    #Grab scale list and earlier output
     nscales = list(scales["Scales"])
 
     #Fix list so it is a useable list
@@ -32,27 +32,34 @@ def grab_scale():
         #Fix sharps
         elif item == "#":
             nscales[current_item] = nscales[current_item - 1] + "#"
+            nscales.remove(nscales[current_item - 1])
             current_item = current_item + 1
 
         #Fix flats
         elif item == "b":
             nscales[current_item] = nscales[current_item - 1] + "b"
+            nscales.remove(nscales[current_item - 1])
             current_item = current_item + 1
         else:
             current_item = current_item + 1
     
     #Put together output
-    output = nscales[int(random() * len(nscales))]
+    selected = nscales[int(random() * len(nscales))]
+    print(selected)
+    output = selected + "\n"
     print(nscales)
     print(output)
 
+    #Remove outputted scale from list
+    nscales.remove(selected)
+    scales["Scales"] = nscales
+    print(scales)
+
     #Output template code
-    output_scale = Text(theGUI, height = 1, width = 2)
-    output_scale.grid(row = 3, column = 0)
     output_scale.insert(END, output)
     #output_scale = Label(theGUI, text=output).grid(row = 3, column = 0)
     
-    return
+    return scales
 
 #Generate GUI
 theGUI = Tk()
@@ -67,6 +74,10 @@ scales = json.load(open("My_Scales.txt"))
 scale_list = "Your scales are: " + scales["Scales"]
 label_intro = Label(theGUI, text="Welcome to the Random Music Scale Generator").grid(row = 0, columnspan = 1)
 list_of_scales = Label(theGUI, text=scale_list).grid(row = 1, column = 0)
+
+#Setup output box
+output_scale = Text(theGUI, height = 20, width = 2)
+output_scale.grid(row = 3, column = 0)
 
 #Setup button
 button_generate = Button(theGUI, text = "Random Scale", command = grab_scale).grid(row = 2, column = 0)
