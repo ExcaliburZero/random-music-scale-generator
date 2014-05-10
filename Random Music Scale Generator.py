@@ -16,7 +16,7 @@ import ast
 #Grab random scale
 def grab_scale():
 
-    #Grab scale list and earlier output
+    #Grab scale list
     nscales = list(scales["Scales"])
 
     #Fix list so it is a useable list
